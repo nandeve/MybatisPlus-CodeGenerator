@@ -11,7 +11,7 @@ public class MybatisPlusGenerator {
         //当前项目路径
         String projectPath = System.getProperty("user.dir");
         //连接数据库的配置
-        String url = "jdbc:mysql://localhost:3306/mybatis_plus?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC";
         String username = "root";
         String password = "1234";
 
@@ -24,7 +24,7 @@ public class MybatisPlusGenerator {
                 })
                 //包名配置
                 .packageConfig(builder -> {
-                    builder.parent("com.example.goods") // 设置父包名
+                    builder.parent("com.bjsy") // 设置父包名
                             .service("service")
                             .serviceImpl("service.impl")
                             .controller("controller")
@@ -35,12 +35,11 @@ public class MybatisPlusGenerator {
                 })
                 //策略配置
                 .strategyConfig(builder -> {
-                    builder.addInclude("goods", "category") // 设置需要生成的表名
+                    builder.addInclude("book", "category") // 设置需要生成的表名
                             .entityBuilder() //实体类配置
                             .enableLombok() //开启lombok
                             .disableSerialVersionUID() //禁止生成serialVersionUID
-                            .logicDeleteColumnName("is_deleted") //说明逻辑删除字段
-                            .addIgnoreColumns("create_time", "update_time") //忽略创建和更新时间字段
+                            .logicDeleteColumnName("delete") //说明逻辑删除字段
                             .controllerBuilder() //controller配置
                             .enableRestStyle() //开启restful api
                             .serviceBuilder() //service配置
@@ -50,7 +49,6 @@ public class MybatisPlusGenerator {
 
 
                 })
-                .templateEngine(new FreemarkerTemplateEngine())
                 .execute();
 
     }
